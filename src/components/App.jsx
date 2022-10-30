@@ -20,6 +20,24 @@ export const App = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
+    function fetchImages() {
+      setIsLoading(true);
+
+      FetchApi.fetchImages(page, query)
+        .then(resp => {
+          console.log(resp);
+          setImages(state => [...state, ...resp])
+        }
+        )
+        .catch(err => {
+          setError(err.message);
+          toast.error(`${err.message}`, { position: 'top-center' });
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    };
+
     if (query) {
       fetchImages();
     }
@@ -41,23 +59,23 @@ export const App = () => {
     evt.target.reset();
   };
 
-  function fetchImages() {
-    setIsLoading(true);
+  // function fetchImages() {
+  //   setIsLoading(true);
 
-    FetchApi.fetchImages(page, query)
-      .then(resp => {
-        console.log(resp);
-        setImages(state => [...state, ...resp])
-      }
-      )
-      .catch(err => {
-        setError(err.message);
-        toast.error(`${err.message}`, { position: 'top-center' });
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  };
+  //   FetchApi.fetchImages(page, query)
+  //     .then(resp => {
+  //       console.log(resp);
+  //       setImages(state => [...state, ...resp])
+  //     }
+  //     )
+  //     .catch(err => {
+  //       setError(err.message);
+  //       toast.error(`${err.message}`, { position: 'top-center' });
+  //     })
+  //     .finally(() => {
+  //       setIsLoading(false);
+  //     });
+  // };
 
   const loadMore = () => {
     setPage(prevPage => prevPage + 1);

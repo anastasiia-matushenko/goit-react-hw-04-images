@@ -9,7 +9,7 @@ export const Modal = ({ onClose, url }) => {
     return () => {
       document.removeEventListener('keydown', handleKeydown);
     }
-  }, []);
+  });
 
   const close = evt => {
     if (evt.target === evt.currentTarget) onClose();
