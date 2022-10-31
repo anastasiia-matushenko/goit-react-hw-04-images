@@ -25,7 +25,6 @@ export const App = () => {
 
       FetchApi.fetchImages(page, query)
         .then(resp => {
-          console.log(resp);
           setImages(state => [...state, ...resp])
         }
         )
@@ -41,7 +40,7 @@ export const App = () => {
     if (query) {
       fetchImages();
     }
-  }, [page, query])
+  }, [page, query]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -58,24 +57,6 @@ export const App = () => {
     setImages([]);
     evt.target.reset();
   };
-
-  // function fetchImages() {
-  //   setIsLoading(true);
-
-  //   FetchApi.fetchImages(page, query)
-  //     .then(resp => {
-  //       console.log(resp);
-  //       setImages(state => [...state, ...resp])
-  //     }
-  //     )
-  //     .catch(err => {
-  //       setError(err.message);
-  //       toast.error(`${err.message}`, { position: 'top-center' });
-  //     })
-  //     .finally(() => {
-  //       setIsLoading(false);
-  //     });
-  // };
 
   const loadMore = () => {
     setPage(prevPage => prevPage + 1);

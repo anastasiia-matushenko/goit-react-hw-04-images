@@ -9,7 +9,6 @@ export const Modal = ({ onClose, url }) => {
 
       onClose();
     };
-
     document.addEventListener('keydown', handleKeydown);
 
     return () => {
